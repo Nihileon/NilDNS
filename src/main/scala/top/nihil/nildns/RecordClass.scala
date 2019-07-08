@@ -15,7 +15,8 @@ object RecordClass extends Enumeration {
 
   def parse(iter: ByteIterator): Value = RecordClass(iter.getShort)
 
-  def write(out: ByteStringBuilder, value: Value) = Unit {
+  def write(out: ByteStringBuilder, value: Value): Unit = {
     out putShort value.id
   }
+
 }
