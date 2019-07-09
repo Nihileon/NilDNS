@@ -6,7 +6,9 @@ scalaVersion := "2.12.5"
 
 resolvers += "Typesafe Repository" at "http://repo.typesafe.com/typesafe/releases/"
 
-libraryDependencies += "com.typesafe.akka" % "akka-actor_2.11" % "2.3.4"
+//libraryDependencies += "com.typesafe.akka" % "akka-actor_2.11" % "2.3.4"
+
+libraryDependencies += "com.typesafe.akka" %% "akka-actor" % "2.5.23"
 
 libraryDependencies += "org.scalaz" %% "scalaz-core" % "7.2.28"
 

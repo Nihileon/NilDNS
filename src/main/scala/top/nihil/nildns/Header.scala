@@ -22,13 +22,13 @@ import akka.util.{ByteIterator, ByteString, ByteStringBuilder}
     +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
  */
 
-case class Header(ID: Int, flags: Int, QDCOUNT: Int, ANCOUNT: Int, NSCOUNT: Int, ARCOUNT: Int) {
+case class Header(ID: Int, flags: Flags, QDCOUNT: Int = 0, ANCOUNT: Int = 0, NSCOUNT: Int = 0, ARCOUNT: Int = 0) {
 
   implicit val byteOrder = ByteOrder BIG_ENDIAN
 
   def write(bsb: ByteStringBuilder): Unit = {
     bsb.putShort(ID)
-      .putShort(flags)
+      .putShort(flags toShort)
       .putShort(ANCOUNT)
       .putShort(NSCOUNT)
       .putShort(ARCOUNT)
@@ -42,7 +42,7 @@ object Header {
 
   def parse(iter: ByteIterator): Header = {
     val ID = iter getShort
-    val flags = iter getShort
+    val flags = Flags(iter getShort)
     val QDCOUNT = iter getShort
     val ANCOUNT = iter getShort
     val NSCOUNT = iter getShort

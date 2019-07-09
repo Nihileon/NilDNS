@@ -33,6 +33,8 @@ case class Flags(flags: Short) extends AnyVal {
   def isRA: Boolean = (flags & (1 << 7)) != 0
 
   def rCode: RCODE.Value = RCODE(flags & 0xf)
+
+  def toShort: Short = flags
 }
 
 object Flags {
@@ -40,6 +42,7 @@ object Flags {
   def get(answer: Boolean = false, opCode: OPCODE.Value = OPCODE QUERY, AA: Boolean = false,
             TC: Boolean = false, RD: Boolean = true, RA: Boolean = false,
             rCode: RCODE.Value = RCODE NO_ERROR): Flags = {
+
     new Flags((
       (if (answer) 1 << 15 else 0) |
         (opCode.id << 11) |
